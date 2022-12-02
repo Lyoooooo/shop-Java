@@ -4,6 +4,7 @@
  */
 
 package com.mycompany.mavenproject1;
+import javax.swing.*;
 
 /**
  *
@@ -12,6 +13,17 @@ package com.mycompany.mavenproject1;
 public class Mavenproject1 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        final int WINDOW_HEIGHT = 400;
+        final int WINDOW_WIDTH = 500;
+        
+        JFrame window = new JFrame();
+        
+        window.setTitle("Potite fenêtre");
+        
+        window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        window.setVisible(true);
     }
 }
