@@ -2,7 +2,7 @@
 package com.mycompany.mavenproject1;
 import javax.swing.*;
 import java.sql.*;
-import static com.mycompany.mavenproject1.DB;
+import static com.mycompany.mavenproject1.DB.*;
 
 //Main
 public class Mavenproject1 {
