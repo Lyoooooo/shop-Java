@@ -6,6 +6,9 @@
 package com.mycompany.mavenproject1;
 import javax.swing.*;
 
+import static com.mycompany.mavenproject1.DB.*;
+import java.sql.*;
+
 /**
  *
  * @author leotr
@@ -13,6 +16,7 @@ import javax.swing.*;
 public class Mavenproject1 {
 
     public static void main(String[] args) {
+        Connection con = connect();
         final int WINDOW_HEIGHT = 400;
         final int WINDOW_WIDTH = 500;
         
