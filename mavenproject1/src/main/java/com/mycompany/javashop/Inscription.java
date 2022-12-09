@@ -9,12 +9,13 @@ package com.mycompany.javashop;
  * @author leotr
  */
 public class Inscription extends javax.swing.JPanel {
-
+    User user = new User();
     /**
      * Creates new form Inscription
      */
-    public Inscription() {
+    public Inscription(User user) {
         initComponents();
+        this.user = user;
     }
 
     /**

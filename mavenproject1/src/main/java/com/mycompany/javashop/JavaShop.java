@@ -8,8 +8,9 @@ import javax.swing.JFrame;
 public class JavaShop {
 
     public static void main(String[] args) {
+        User user = new User();
         Connection con = connect();
-        fenetre wind = new fenetre();
-        wind.displayShop();
+        fenetre wind = new fenetre(user);
+        wind.displayConnection();
     }
 }

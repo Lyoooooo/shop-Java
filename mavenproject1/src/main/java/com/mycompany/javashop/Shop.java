@@ -9,12 +9,13 @@ package com.mycompany.javashop;
  * @author leotr
  */
 public class Shop extends javax.swing.JPanel {
-
+    User user = new User();
     /**
      * Creates new form Shop
      */
-    public Shop() {
+    public Shop(User user) {
         initComponents();
+        this.user = user;
     }
 
     /**
