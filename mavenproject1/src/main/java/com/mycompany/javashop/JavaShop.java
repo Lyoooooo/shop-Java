@@ -1,19 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
- */
-
+//Libraries
 package com.mycompany.javashop;
-
+import static com.mycompany.javashop.DB.*;
+import java.sql.Connection;
 import javax.swing.JFrame;
 
-/**
- *
- * @author leotr
- */
+//Main
 public class JavaShop {
 
     public static void main(String[] args) {
+        Connection con = connect();
         fenetre wind = new fenetre();
         wind.displayInscription();
     }

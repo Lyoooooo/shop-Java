@@ -10,7 +10,7 @@ public class DB {
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop-java?serverTimezone=UTC","root","");
             System.out.println("Connection is Successful to the database");
-            String query = "Insert into client(idc,nom) values(null,'ram')";
+            String query = "Insert into user(idU,nameU,surnameU,mailU,pwU) values(null,'ram','test','test2','test3')";
             Statement statement = con.createStatement();
             statement.execute(query);
 
@@ -20,7 +20,5 @@ public class DB {
         }
         return con;
     }
-    
-    
     
 }
