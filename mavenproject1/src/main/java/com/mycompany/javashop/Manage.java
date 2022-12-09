@@ -23,14 +23,6 @@ public class Manage {
             prod.setPicP(rs.getString("picP"));
             listProd.add(prod);
         }
-         for (Product obj : listProd) {
-         System.out.print("ID: "+obj.getIdP()+", ");
-         System.out.print("Name: "+obj.getNameP()+", ");
-         System.out.print("Salary: "+obj.getPriceP()+", ");
-         System.out.print("Country: "+obj.getStorageP()+", ");
-         System.out.print("Address: "+obj.getPicP());
-         System.out.println();
-      }
         return listProd;
     }
 }
