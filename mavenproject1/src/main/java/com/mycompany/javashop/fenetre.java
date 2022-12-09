@@ -40,5 +40,16 @@ public class fenetre {
     
         window.setVisible(true);
     }
-
+    
+    public void displayShop(){
+        Shop page = new Shop();
+        JFrame window = new JFrame();
+        window.setTitle("Account creation");
+        window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        window.add(page);
+    
+        window.setVisible(true);
+    }
 }

@@ -4,7 +4,6 @@
  */
 
 package com.mycompany.javashop;
-
 import javax.swing.JFrame;
 
 /**
@@ -15,6 +14,6 @@ public class JavaShop {
 
     public static void main(String[] args) {
         fenetre wind = new fenetre();
-        wind.displayInscription();
+        wind.displayShop();
     }
 }
