@@ -1,5 +1,5 @@
 //Libraries
-package com.mycompany.mavenproject1;
+package com.mycompany.javashop;
 import java.sql.*;
 
 //DB Class
@@ -8,7 +8,6 @@ public class DB {
     public static Connection connect() {
         Connection con = null;
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop-java?serverTimezone=UTC","root","");
             System.out.println("Connection is Successful to the database");
             String query = "Insert into client(idc,nom) values(null,'ram')";
@@ -16,7 +15,7 @@ public class DB {
             statement.execute(query);
 
         }
-        catch(ClassNotFoundException | SQLException e) {
+        catch(SQLException e) {
             System.out.println(e);
         }
         return con;
