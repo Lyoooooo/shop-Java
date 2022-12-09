@@ -15,6 +15,6 @@ public class JavaShop {
 
     public static void main(String[] args) {
         fenetre wind = new fenetre();
-        wind.displayConnection();
+        wind.displayInscription();
     }
 }
