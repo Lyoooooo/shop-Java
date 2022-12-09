@@ -10,6 +10,6 @@ public class JavaShop {
     public static void main(String[] args) {
         Connection con = connect();
         fenetre wind = new fenetre();
-        wind.displayInscription();
+        wind.displayShop();
     }
 }
