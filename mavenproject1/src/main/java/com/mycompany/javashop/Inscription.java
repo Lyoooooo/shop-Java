@@ -4,6 +4,15 @@
  */
 package com.mycompany.javashop;
 
+import static com.mycompany.javashop.DB.connect;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author leotr
@@ -28,23 +37,23 @@ public class Inscription extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        Field2 = new javax.swing.JTextField();
+        Field4 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        Field1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        Field3 = new javax.swing.JTextField();
+        Field5 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
 
         jLabel1.setText("Create account");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        Field2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                Field2ActionPerformed(evt);
             }
         });
 
@@ -63,9 +72,9 @@ public class Inscription extends javax.swing.JPanel {
 
         jLabel6.setText("Mail");
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        Field3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                Field3ActionPerformed(evt);
             }
         });
 
@@ -82,24 +91,24 @@ public class Inscription extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(53, 53, 53)
-                        .addComponent(jTextField6))
+                        .addComponent(Field3))
                     .addComponent(jButton1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(30, 30, 30)
-                        .addComponent(jTextField1))
+                        .addComponent(Field2))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(26, 26, 26)
-                        .addComponent(jTextField2))
+                        .addComponent(Field4))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(26, 26, 26)
-                        .addComponent(jTextField4))
+                        .addComponent(Field5))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(44, 44, 44)
-                        .addComponent(jTextField3)))
+                        .addComponent(Field1)))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -112,21 +121,21 @@ public class Inscription extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Field1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Field2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel6))
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Field3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Field4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Field5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(62, 62, 62)
                 .addComponent(jButton1)
@@ -134,21 +143,62 @@ public class Inscription extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void Field2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Field2ActionPerformed
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_Field2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        System.out.println(jTextField1.getText());        // TODO add your handling code here:
+        String name = Field1.getText();
+        String surname = Field2.getText();
+        String mail = Field3.getText();
+        String pw1 = Field4.getText();
+        String pw2 = Field5.getText();
+        System.out.println(name + surname + mail + pw1 + pw2);
+        ResultSet rs = null;
+        int pwDb = 0;
+        Connection con = connect();
+        
+        try {
+            String query = "SELECT COUNT(mailU) FROM user WHERE mailU = '" + mail + "'";
+            Statement statement = con.createStatement();
+            rs = statement.executeQuery(query);
+            rs.next();
+            pwDb = rs.getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(testInscr.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+        if(pwDb != 0){
+            JOptionPane.showMessageDialog(null, "Mail adress already used");
+        }
+        else if(!pw1.equals(pw2)){
+            JOptionPane.showMessageDialog(null, "Passwords not matching");
+        }else{
+            try {
+                String query = "Insert into user(idU,nameU,surnameU,mailU,pwU) values(null,'" + name + "','" + surname +"','" + mail + "','" + pw1 + "')";
+                Statement statement = con.createStatement();
+                statement.executeUpdate(query);
+                fenetre wind = new fenetre(user);
+            wind.displayShop();
+            setVisible(false);
+            } catch (SQLException ex) {
+                Logger.getLogger(testInscr.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void Field3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Field3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_Field3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Field1;
+    private javax.swing.JTextField Field2;
+    private javax.swing.JTextField Field3;
+    private javax.swing.JTextField Field4;
+    private javax.swing.JTextField Field5;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -156,10 +206,5 @@ public class Inscription extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }

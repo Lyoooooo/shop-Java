@@ -133,6 +133,7 @@ public class testInscr extends javax.swing.JPanel {
             pwDb = rs.getString(1);
         } catch (SQLException ex) {
             Logger.getLogger(testInscr.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         System.out.println("mdp bdd = " + pwDb);
         if(pw.equals(pwDb)){

@@ -17,6 +17,6 @@ public class JavaShop {
         Connection con = connect();
         ArrayList<Product> listProd = new ArrayList<Product>();
         fenetre wind = new fenetre(user);
-        wind.displayConnection();
+        wind.displayInscription();
     }
 }
