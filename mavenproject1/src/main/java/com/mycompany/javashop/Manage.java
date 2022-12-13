@@ -8,12 +8,9 @@ import java.util.ArrayList;
 public class Manage {
 
     public static ArrayList<Product> ListProd(Connection con) throws SQLException {
-        System.out.println("test");
         ArrayList<Product> listProd = new ArrayList<Product>();
-        String sql;
         Statement stmt = con.createStatement();
-        sql = "SELECT * FROM product";
-        ResultSet rs = stmt.executeQuery(sql);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM product");
         while (rs.next()) {
             Product prod = new Product();
             prod.setIdP(rs.getInt("idP"));
@@ -24,6 +21,22 @@ public class Manage {
             listProd.add(prod);
         }
         return listProd;
+    }
+    
+    public static ArrayList<Product> ResearchProd(Connection con, String search) throws SQLException {
+        ArrayList<Product> researchProd = new ArrayList<Product>();
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM product WHERE nameP LIKE %"+search+"%");
+        while (rs.next()) {
+            Product prod = new Product();
+            prod.setIdP(rs.getInt("idP"));
+            prod.setNameP(rs.getString("nameP"));
+            prod.setPriceP(rs.getFloat("priceP"));
+            prod.setStorageP(rs.getInt("storageP"));
+            prod.setPicP(rs.getString("picP"));
+            researchProd.add(prod);
+        }
+        return researchProd;
     }
 
     public static boolean isAvailable(Connection con, int idP, int quantity) throws SQLException {
