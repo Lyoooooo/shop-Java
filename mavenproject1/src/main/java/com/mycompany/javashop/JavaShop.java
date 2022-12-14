@@ -14,8 +14,6 @@ public class JavaShop {
 
     public static void main(String[] args) {
         User user = new User();
-        Connection con = connect();
-        ArrayList<Product> listProd = new ArrayList<Product>();
         fenetre wind = new fenetre(user);
         wind.displayInscription();
     }
