@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * @author leotr
  */
 public final class Shop extends javax.swing.JPanel {
-    private String req;
+    private String search;
     User user = new User();
     Manage manager = new Manage();
     /**
@@ -33,9 +33,9 @@ public final class Shop extends javax.swing.JPanel {
         showProduct();
     }
     
-    public Shop(User user, String req) throws SQLException{
+    public Shop(User user, String search) throws SQLException{
         initComponents();
-        this.req = req;
+        this.search = search;
         this.user = user;
         showProduct();
     }
@@ -43,7 +43,13 @@ public final class Shop extends javax.swing.JPanel {
     public void showProduct() throws SQLException{
         System.out.println("test 1");
         Connection con = connect();
-        ArrayList<Product> list = manager.ListProd(con);
+        ArrayList<Product> list = new ArrayList<>();
+        if (!search.equals("null")) {
+            list = manager.ResearchProd(con, search);
+            search = "null";
+        } else {
+            list = manager.ListProd(con);
+        }
         DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
 
         ImageIcon icon = new ImageIcon("test.png");

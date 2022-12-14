@@ -23,10 +23,10 @@ public class Manage {
         return listProd;
     }
 
-    public static ArrayList<Product> ResearchProd(Connection con, String search) throws SQLException {
+    public ArrayList<Product> ResearchProd(Connection con, String search) throws SQLException {
         ArrayList<Product> researchProd = new ArrayList<>();
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM product WHERE nameP LIKE %" + search + "%");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM product WHERE nameP LIKE '%" + search + "%'");
         while (rs.next()) {
             Product prod = new Product();
             prod.setIdP(rs.getInt("idP"));
@@ -39,7 +39,7 @@ public class Manage {
         return researchProd;
     }
 
-    public static boolean isAvailable(Connection con, int idP, int quantity) throws SQLException {
+    public boolean isAvailable(Connection con, int idP, int quantity) throws SQLException {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT storageP FROM product WHERE idP = '" + idP + "'");
         while (rs.next()) {
@@ -50,7 +50,7 @@ public class Manage {
         return false;
     }
 
-    public static void addToCart(Connection con, int idP, int idU, int quantity) throws SQLException {
+    public void addToCart(Connection con, int idP, int idU, int quantity) throws SQLException {
         int q, stock;
         PreparedStatement p = con.prepareStatement("SELECT * FROM cart WHERE idP=" + idP + " AND idU=" + idU);
         ResultSet rs = p.executeQuery();
@@ -79,7 +79,7 @@ public class Manage {
         }
     }
 
-    public static void discardCart(Connection con, int idU) throws SQLException {
+    public void discardCart(Connection con, int idU) throws SQLException {
         int idP, quantity, storage = 0;
         PreparedStatement p = con.prepareStatement("SELECT * FROM cart WHERE idU=" + idU);
         ResultSet rs = p.executeQuery();
@@ -102,7 +102,7 @@ public class Manage {
         }
     }
 
-    public static ArrayList<Product> getCart(Connection con, int idU) throws SQLException {
+    public ArrayList<Product> getCart(Connection con, int idU) throws SQLException {
         ArrayList<Product> listCart = new ArrayList<>();
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM product AS p,cart AS c WHERE p.idU=" + idU + " AND c.idu=" + idU);

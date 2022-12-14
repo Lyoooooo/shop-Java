@@ -55,10 +55,7 @@ public class fenetre {
     }
 
     public void displayShop() throws SQLException {
-        Shop page = new Shop(user);
-        if (!search.equals("null")) {
-            page = new Shop(user,search);
-        }
+        Shop page = new Shop(user, search);
         JFrame window = new JFrame();
         window.setTitle("SHOPPING PARK");
         window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
