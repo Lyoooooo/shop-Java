@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Manage {
 
     public static ArrayList<Product> ListProd(Connection con) throws SQLException {
-        ArrayList<Product> listProd = new ArrayList<Product>();
+        ArrayList<Product> listProd = new ArrayList<>();
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM product");
         while (rs.next()) {
@@ -24,7 +24,7 @@ public class Manage {
     }
     
     public static ArrayList<Product> ResearchProd(Connection con, String search) throws SQLException {
-        ArrayList<Product> researchProd = new ArrayList<Product>();
+        ArrayList<Product> researchProd = new ArrayList<>();
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM product WHERE nameP LIKE %"+search+"%");
         while (rs.next()) {
@@ -48,5 +48,19 @@ public class Manage {
             }
         }
         return false;
+    }
+    
+    public static void addToCart(Connection con, int idP, int idU, int quantity) throws SQLException {
+        PreparedStatement p = con.prepareStatement("SELECT * FROM cart WHERE idP="+idP+" AND idU="+idU);
+        ResultSet rs = p.executeQuery();
+        if (rs.next()) {
+            quantity += rs.getInt("quantity");
+            p = con.prepareStatement("UPDATE cart SET quantity=? WHERE idP="+idP+" AND idU="+idU);
+            p.setInt(1,quantity);
+            p.executeUpdate();
+        } else {
+        Statement stmt = con.createStatement();
+        stmt.executeUpdate("INSERT INTO cart VALUES (null,"+idU+","+idP+","+quantity+")");
+        }
     }
 }
