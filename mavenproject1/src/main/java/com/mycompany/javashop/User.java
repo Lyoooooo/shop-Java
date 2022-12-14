@@ -10,9 +10,19 @@ package com.mycompany.javashop;
  */
 public class User {
     private boolean connected;
+    private int idu;
     private String name;
     private String surname;
     private String mail;
+    
+    public int getIdu() {
+        return idu;
+    }
+
+    public void setIdu(int idu) {
+        this.idu = idu;
+    }
+    
         
     public void User(){
         setConnected(false);

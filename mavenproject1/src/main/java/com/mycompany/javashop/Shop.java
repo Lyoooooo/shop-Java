@@ -7,7 +7,10 @@ package com.mycompany.javashop;
 import static com.mycompany.javashop.DB.connect;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -220,7 +223,18 @@ public final class Shop extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jTextField2.getText();
+        int prod = Integer.parseInt(jTextField2.getText());
+        int amount = (Integer) jSpinner1.getValue();
+        
+        Connection con = connect();
+        
+        try {
+                String query = "Insert into cart(idC,idU,idP,quantity) values(null,'" + user.getIdu() + "','" + prod +"','" + amount + "')";
+                Statement statement = con.createStatement();
+                statement.executeUpdate(query);
+            } catch (SQLException ex) {
+                Logger.getLogger(testInscr.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
