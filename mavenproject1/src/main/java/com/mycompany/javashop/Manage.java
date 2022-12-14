@@ -89,16 +89,16 @@ public class Manage {
             PreparedStatement q = con.prepareStatement("SELECT storageP FROM product WHERE idP=" + idP);
             rs = q.executeQuery();
             while (rs.next()) {
-                storage =rs.getInt("storageP");
+                storage = rs.getInt("storageP");
             }
             storage += quantity;
             q = con.prepareStatement("UPDATE product SET quantity=? WHERE idP=" + idP);
             q.setInt(1, storage);
             q.executeUpdate();
-            
+
             PreparedStatement dlt = con.prepareStatement("DELETE FROM Table WHERE idU = ?");
-dlt.setInt(1,idU);
-dlt.executeUpdate(); 
+            dlt.setInt(1, idU);
+            dlt.executeUpdate();
         }
     }
 
