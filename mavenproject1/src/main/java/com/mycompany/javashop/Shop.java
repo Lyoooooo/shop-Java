@@ -18,17 +18,23 @@ import javax.swing.table.DefaultTableModel;
  * @author leotr
  */
 public final class Shop extends javax.swing.JPanel {
+    private String req;
     User user = new User();
     Manage manager = new Manage();
     /**
      * Creates new form Shop
      */
     public Shop(User user) throws SQLException{
-        System.out.println("test 3");
         initComponents();
         this.user = user;
         showProduct();
-        System.out.println("test 2");
+    }
+    
+    public Shop(User user, String req) throws SQLException{
+        initComponents();
+        this.req = req;
+        this.user = user;
+        showProduct();
     }
     
     public void showProduct() throws SQLException{
@@ -95,9 +101,20 @@ public final class Shop extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+
         jLabel1.setText("Item ID");
 
         jButton2.setText("Add to cart");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -197,6 +214,14 @@ public final class Shop extends javax.swing.JPanel {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jTextField2.getText();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
