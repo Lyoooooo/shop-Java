@@ -139,9 +139,12 @@ public class testInscr extends javax.swing.JPanel {
         if(pw.equals(pwDb)){
             System.out.println("HELLOOOOOOOOOOO");
             fenetre wind = new fenetre(user);
-            wind.displayShop();
+            try {
+                wind.displayShop();
+            } catch (SQLException ex) {
+                Logger.getLogger(testInscr.class.getName()).log(Level.SEVERE, null, ex);
+            }
             setVisible(false);
-            
         }else{
            JOptionPane.showMessageDialog(null, "Incorrect password or mail"); 
         }

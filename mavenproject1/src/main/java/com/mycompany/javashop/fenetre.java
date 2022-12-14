@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.javashop;
+import java.sql.SQLException;
 import javax.swing.*;
 
 
@@ -13,8 +14,8 @@ import javax.swing.*;
 public class fenetre {
     User user = new User();
     
-    final int WINDOW_HEIGHT = 400;
-    final int WINDOW_WIDTH = 500;
+    final int WINDOW_HEIGHT = 600;
+    final int WINDOW_WIDTH = 1000;
     
     private JPanel panel = new JPanel();
     
@@ -46,7 +47,7 @@ public class fenetre {
         window.setVisible(true);
     }
     
-    public void displayShop(){
+    public void displayShop() throws SQLException{
         Shop page = new Shop(user);
         JFrame window = new JFrame();
         window.setTitle("Account creation");
@@ -57,4 +58,5 @@ public class fenetre {
     
         window.setVisible(true);
     }
+
 }

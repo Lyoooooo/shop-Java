@@ -12,11 +12,11 @@ import javax.swing.JFrame;
 //Main
 public class JavaShop {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         User user = new User();
         Connection con = connect();
         ArrayList<Product> listProd = new ArrayList<Product>();
         fenetre wind = new fenetre(user);
-        wind.displayInscription();
+        wind.displayShop();
     }
 }

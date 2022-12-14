@@ -7,7 +7,7 @@ import java.util.ArrayList;
 //Management
 public class Manage {
 
-    public static ArrayList<Product> ListProd(Connection con) throws SQLException {
+    public ArrayList<Product> ListProd(Connection con) throws SQLException {
         ArrayList<Product> listProd = new ArrayList<>();
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM product");
