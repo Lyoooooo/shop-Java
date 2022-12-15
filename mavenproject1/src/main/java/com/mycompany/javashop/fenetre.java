@@ -41,7 +41,7 @@ public class fenetre {
 
         window.setVisible(true);
     }
-
+    
     public void displayConnection() {
         testInscr page = new testInscr(user);
         JFrame window = new JFrame();
