@@ -65,5 +65,17 @@ public class fenetre {
 
         window.setVisible(true);
     }
+    
+    public void displayCart() throws SQLException {
+        Cart page = new Cart(user);
+        JFrame window = new JFrame();
+        window.setTitle("Connection");
+        window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        window.add(page);
+
+        window.setVisible(true);
+    }
 
 }
