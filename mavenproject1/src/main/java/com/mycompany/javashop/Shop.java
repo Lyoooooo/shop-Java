@@ -21,27 +21,34 @@ import javax.swing.table.DefaultTableModel;
  * @author leotr
  */
 public final class Shop extends javax.swing.JPanel {
+
     private String search;
     User user = new User();
     Manage manager = new Manage();
+
     /**
      * Creates new form Shop
      */
-    public Shop(User user) throws SQLException{
+    public Shop(User user) throws SQLException {
         initComponents();
         this.user = user;
         showProduct();
+        jLabel2.setText("Hello " + user.getName());
     }
-    
-    public Shop(User user, String search) throws SQLException{
+
+    public Shop(User user, String search) throws SQLException {
         initComponents();
         this.search = search;
         this.user = user;
         showProduct();
+        if (user.getName().equals("null")) {
+        } else {
+            jLabel7.setText("Hello " + user.getName());
+        }
+
     }
-    
-    public void showProduct() throws SQLException{
-        System.out.println("test 1");
+
+    public void showProduct() throws SQLException {
         Connection con = connect();
         ArrayList<Product> list = new ArrayList<>();
         if (!search.equals("null")) {
@@ -50,21 +57,18 @@ public final class Shop extends javax.swing.JPanel {
         } else {
             list = manager.ListProd(con);
         }
-        DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         jTable2.getColumnModel().getColumn(4).setCellRenderer(new ImageRenderer());
-        ImageIcon icon = new ImageIcon("test.png");
-        //f.add(new JLabel(icon));
         Object[] row = new Object[5];
-        for(int i = 0; i<list.size(); i++){
-            row[0]=list.get(i).getIdP();
-            row[1]=list.get(i).getNameP();
-            row[2]=list.get(i).getPriceP();
-            row[3]=list.get(i).getStorageP();
-            row[4]= "test.png";
+        for (int i = 0; i < list.size(); i++) {
+            row[0] = list.get(i).getIdP();
+            row[1] = list.get(i).getNameP();
+            row[2] = list.get(i).getPriceP();
+            row[3] = list.get(i).getStorageP();
+            row[4] = list.get(i).getPicP();
             model.addRow(row);
         }
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,6 +87,8 @@ public final class Shop extends javax.swing.JPanel {
         SearchText = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jTextField2 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -146,18 +152,26 @@ public final class Shop extends javax.swing.JPanel {
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Segoe Print", 1, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(SearchText, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(305, 305, 305)
@@ -174,7 +188,9 @@ public final class Shop extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(15, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel7))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -183,7 +199,8 @@ public final class Shop extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SearchText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jLabel6))
                 .addContainerGap())
         );
 
@@ -278,7 +295,7 @@ public final class Shop extends javax.swing.JPanel {
         jTable2.setMaximumSize(new java.awt.Dimension(2147483647, 2000));
         jTable2.setMinimumSize(new java.awt.Dimension(200, 200));
         jTable2.setName("Products"); // NOI18N
-        jTable2.setRowHeight(50);
+        jTable2.setRowHeight(80);
         jTable2.setShowGrid(true);
         jScrollPane2.setViewportView(jTable2);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
@@ -376,29 +393,35 @@ public final class Shop extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        int prod = Integer.parseInt(jTextField2.getText());
-        int amount = (Integer) jSpinner1.getValue();
-        
-        Connection con = connect();
-        
-        try {
-                String query = "Insert into cart(idC,idU,idP,quantity) values(null,'" + user.getIdu() + "','" + prod +"','" + amount + "')";
+        if (user.isConnected() == false) {
+            fenetre wind = new fenetre(user);
+            wind.displayConnection();
+            setVisible(false);
+        } else {
+            int prod = Integer.parseInt(jTextField2.getText());
+            int amount = (Integer) jSpinner1.getValue();
+
+            Connection con = connect();
+
+            try {
+                String query = "Insert into cart(idC,idU,idP,quantity) values(null,'" + user.getIdu() + "','" + prod + "','" + amount + "')";
                 Statement statement = con.createStatement();
                 statement.executeUpdate(query);
             } catch (SQLException ex) {
                 Logger.getLogger(testInscr.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            String search = SearchText.getText();
-            fenetre wind = new fenetre(user, search);
-            try {
-                wind.displayShop();
-            } catch (SQLException ex) {
-                Logger.getLogger(testInscr.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            setVisible(false);
+        String search = SearchText.getText();
+        fenetre wind = new fenetre(user, search);
+        try {
+            wind.displayShop();
+        } catch (SQLException ex) {
+            Logger.getLogger(testInscr.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -420,9 +443,19 @@ public final class Shop extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        fenetre wind = new fenetre(user);
-        wind.displayInscription();
-        setVisible(false);
+        if (user.isConnected() == false) {
+            fenetre wind = new fenetre(user);
+            wind.displayConnection();
+            setVisible(false);
+        } else {
+            fenetre wind = new fenetre(user);
+            try {
+                wind.displayCart();
+            } catch (SQLException ex) {
+                Logger.getLogger(Shop.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            setVisible(false);
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
 
@@ -439,6 +472,8 @@ public final class Shop extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

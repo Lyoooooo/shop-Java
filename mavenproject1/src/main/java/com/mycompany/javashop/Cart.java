@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * @author leotr
  */
 public final class Cart extends javax.swing.JPanel {
+    private float total = 0;
     String search = "null";
     User user = new User();
     Manage manager = new Manage();
@@ -34,13 +35,11 @@ public final class Cart extends javax.swing.JPanel {
     }
     
     public void showProduct() throws SQLException{
-        System.out.println("test 1");
         Connection con = connect();
         ArrayList<Product> list = new ArrayList<>();
-            list = manager.ListProd(con);
+            list = manager.ListCart(con,user.getIdu());
         DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
-
-        ImageIcon icon = new ImageIcon("test.png");
+        jTable2.getColumnModel().getColumn(4).setCellRenderer(new ImageRenderer());
         //f.add(new JLabel(icon));
         Object[] row = new Object[5];
         for(int i = 0; i<list.size(); i++){
@@ -48,8 +47,19 @@ public final class Cart extends javax.swing.JPanel {
             row[1]=list.get(i).getNameP();
             row[2]=list.get(i).getPriceP();
             row[3]=list.get(i).getStorageP();
-            row[4]= icon;
+            row[4]= list.get(i).getPicP();
+            total += (list.get(i).getPriceP() * list.get(i).getStorageP());
             model.addRow(row);
+        }
+        if(total != 0){
+            if(total < 50){
+                jLabel1.setText("TOTAL : " + total + "£");
+            }else{
+                total = (float) (total - (0.2 * total));
+                jLabel1.setText("TOTAL : " + total + "£  -20% discount over 50£ ");
+            }
+        }else{
+            jLabel1.setText("Your cart is empty");
         }
     }
     
@@ -165,7 +175,7 @@ public final class Cart extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Item ID", "Name", "Price", "Stock", "test image"
+                "Item ID", "Name", "Price", "Amount", "test image"
             }
         ) {
             Class[] types = new Class [] {
@@ -180,6 +190,7 @@ public final class Cart extends javax.swing.JPanel {
         jTable2.setMaximumSize(new java.awt.Dimension(2147483647, 2000));
         jTable2.setMinimumSize(new java.awt.Dimension(200, 200));
         jTable2.setName("Products"); // NOI18N
+        jTable2.setRowHeight(80);
         jTable2.setShowGrid(true);
         jScrollPane2.setViewportView(jTable2);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
@@ -198,16 +209,13 @@ public final class Cart extends javax.swing.JPanel {
         jPanel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         jLabel1.setFont(new java.awt.Font("Segoe Print", 1, 18)); // NOI18N
-        jLabel1.setText("Total :");
+        jLabel1.setText("Cart is empty");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(239, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,7 +242,7 @@ public final class Cart extends javax.swing.JPanel {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(153, 153, 255));
@@ -272,7 +280,7 @@ public final class Cart extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))

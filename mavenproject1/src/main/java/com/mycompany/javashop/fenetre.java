@@ -77,5 +77,4 @@ public class fenetre {
 
         window.setVisible(true);
     }
-
 }

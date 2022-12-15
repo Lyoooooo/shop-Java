@@ -20,7 +20,7 @@ public class ImageRenderer extends DefaultTableCellRenderer{
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         String photoName = value.toString();
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon(photoName).getImage().getScaledInstance(40,40,Image.SCALE_DEFAULT));
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(photoName).getImage().getScaledInstance(80,80,Image.SCALE_DEFAULT));
         return new JLabel(imageIcon);
     }
 

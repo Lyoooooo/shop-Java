@@ -22,6 +22,32 @@ public class Manage {
         }
         return listProd;
     }
+    
+    public ArrayList<Product> ListCart(Connection con, int id) throws SQLException {
+        System.out.println("test cart3");
+        
+        ArrayList<Product> listProd = new ArrayList<>();
+        Statement stmt = con.createStatement();
+        Statement stmt2 = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM cart WHERE idU = "+ id);
+        ResultSet rs2;
+        
+        while (rs.next()) {
+            int idp = rs.getInt("idP");
+            rs2 = stmt2.executeQuery("SELECT * FROM product WHERE idP = " + idp);
+            rs2.next();
+            
+            Product prod = new Product();
+            prod.setIdP(rs.getInt("idP"));
+            prod.setNameP(rs2.getString("nameP"));
+            prod.setPriceP(rs2.getFloat("priceP"));
+            prod.setStorageP(rs.getInt("quantity"));            
+            prod.setPicP(rs2.getString("picP"));
+            
+            listProd.add(prod);
+        }
+        return listProd;
+    }
 
     public ArrayList<Product> ResearchProd(Connection con, String search) throws SQLException {
         ArrayList<Product> researchProd = new ArrayList<>();

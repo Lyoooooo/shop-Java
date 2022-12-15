@@ -14,6 +14,7 @@ public class JavaShop {
 
     public static void main(String[] args) throws SQLException {
         User user = new User();
+        user.setName("null");
         String search = "null";
         fenetre wind = new fenetre(user,search);
         wind.displayShop();

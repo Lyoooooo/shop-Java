@@ -74,7 +74,6 @@ public class testInscr extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe Print", 0, 12)); // NOI18N
         jLabel2.setText("Mail");
 
-        jTextField1.setText("   ");
         jTextField1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,11 +203,11 @@ public class testInscr extends javax.swing.JPanel {
         
         Connection con = connect();
         try {
-            String query = "SELECT pwU FROM user WHERE mailU = '" + mail + "'";
+            String query = "SELECT * FROM user WHERE mailU = '" + mail + "'";
             Statement statement = con.createStatement();
             rs = statement.executeQuery(query);
             rs.next();
-            pwDb = rs.getString(1);
+            pwDb = rs.getString("pwU");
         } catch (SQLException ex) {
             Logger.getLogger(testInscr.class.getName()).log(Level.SEVERE, null, ex);
             
@@ -217,6 +216,11 @@ public class testInscr extends javax.swing.JPanel {
         if(pw.equals(pwDb)){
             fenetre wind = new fenetre(user,search);
             try {
+                user.setConnected(true);
+                user.setIdu(rs.getInt("idU"));
+                user.setMail(rs.getString("mailU"));
+                user.setName(rs.getString("nameU"));
+                user.setSurname(rs.getString("surnameU"));
                 wind.displayShop();
             } catch (SQLException ex) {
                 Logger.getLogger(testInscr.class.getName()).log(Level.SEVERE, null, ex);
