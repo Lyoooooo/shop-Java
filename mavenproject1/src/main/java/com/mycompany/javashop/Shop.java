@@ -51,7 +51,7 @@ public final class Shop extends javax.swing.JPanel {
             list = manager.ListProd(con);
         }
         DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
-
+        jTable2.getColumnModel().getColumn(4).setCellRenderer(new ImageRenderer());
         ImageIcon icon = new ImageIcon("test.png");
         //f.add(new JLabel(icon));
         Object[] row = new Object[5];
@@ -60,7 +60,7 @@ public final class Shop extends javax.swing.JPanel {
             row[1]=list.get(i).getNameP();
             row[2]=list.get(i).getPriceP();
             row[3]=list.get(i).getStorageP();
-            row[4]= icon;
+            row[4]= "test.png";
             model.addRow(row);
         }
     }
@@ -278,6 +278,7 @@ public final class Shop extends javax.swing.JPanel {
         jTable2.setMaximumSize(new java.awt.Dimension(2147483647, 2000));
         jTable2.setMinimumSize(new java.awt.Dimension(200, 200));
         jTable2.setName("Products"); // NOI18N
+        jTable2.setRowHeight(50);
         jTable2.setShowGrid(true);
         jScrollPane2.setViewportView(jTable2);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
