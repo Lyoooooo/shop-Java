@@ -22,28 +22,28 @@ public class Manage {
         }
         return listProd;
     }
-    
+
     public ArrayList<Product> ListCart(Connection con, int id) throws SQLException {
         System.out.println("test cart3");
-        
+
         ArrayList<Product> listProd = new ArrayList<>();
         Statement stmt = con.createStatement();
         Statement stmt2 = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM cart WHERE idU = "+ id);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM cart WHERE idU = " + id);
         ResultSet rs2;
-        
+
         while (rs.next()) {
             int idp = rs.getInt("idP");
             rs2 = stmt2.executeQuery("SELECT * FROM product WHERE idP = " + idp);
             rs2.next();
-            
+
             Product prod = new Product();
             prod.setIdP(rs.getInt("idP"));
             prod.setNameP(rs2.getString("nameP"));
             prod.setPriceP(rs2.getFloat("priceP"));
-            prod.setStorageP(rs.getInt("quantity"));            
+            prod.setStorageP(rs.getInt("quantity"));
             prod.setPicP(rs2.getString("picP"));
-            
+
             listProd.add(prod);
         }
         return listProd;
@@ -78,27 +78,24 @@ public class Manage {
 
     public void addToCart(Connection con, int idP, int idU, int quantity) throws SQLException {
         int q, stock;
-        PreparedStatement p = con.prepareStatement("SELECT * FROM cart WHERE idP=" + idP + " AND idU=" + idU);
-        ResultSet rs = p.executeQuery();
-        if (rs.next()) {
-            q = rs.getInt("quantity");
-            stock = quantity + q;
-            p = con.prepareStatement("UPDATE cart SET quantity=? WHERE idP=" + idP + " AND idU=" + idU);
-            p.setInt(1, stock);
-            p.executeUpdate();
-
-            stock = q - quantity;
-            p = con.prepareStatement("UPDATE product SET quantity=? WHERE idP=" + idP);
-            p.setInt(1, stock);
-            p.executeUpdate();
-        } else {
-            Statement stmt = con.createStatement();
-            stmt.executeUpdate("INSERT INTO cart VALUES (null," + idU + "," + idP + "," + quantity + ")");
+        if (isAvailable(con, idP, quantity) == true) {
+            PreparedStatement p = con.prepareStatement("SELECT * FROM cart WHERE idP=" + idP + " AND idU=" + idU);
+            ResultSet rs = p.executeQuery();
+            if (rs.next()) {
+                q = rs.getInt("quantity");
+                q = quantity + q;
+                p = con.prepareStatement("UPDATE cart SET quantity=? WHERE idP=" + idP + " AND idU=" + idU);
+                p.setInt(1, q);
+                p.executeUpdate();
+            } else {
+                Statement stmt = con.createStatement();
+                stmt.executeUpdate("INSERT INTO cart VALUES (null," + idU + "," + idP + "," + quantity + ")");
+            }
             p = con.prepareStatement("SELECT * FROM product WHERE idP=" + idP);
             rs = p.executeQuery();
             if (rs.next()) {
-                stock = rs.getInt("quantity") - quantity;
-                p = con.prepareStatement("UPDATE product SET quantity=? WHERE idP=" + idP);
+                stock = rs.getInt("storageP") - quantity;
+                p = con.prepareStatement("UPDATE product SET storageP=? WHERE idP=" + idP);
                 p.setInt(1, stock);
                 p.executeUpdate();
             }
